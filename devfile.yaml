@@ -1,0 +1,53 @@
+schemaVersion: 2.1.0
+metadata:
+  name: php-di
+components:
+  - name: tools
+    container:
+      image: registry.redhat.io/codeready-workspaces/stacks-php-rhel8
+      memoryLimit: 1Gi
+      endpoints:
+        - exposure: public
+          name: di
+          protocol: http
+          targetPort: 8000
+      volumeMounts:
+        - name: composer
+          path: /home/jboss/.composer
+  - name: composer
+    volume:
+      size: 1G
+commands:
+  - id: install-dependencies
+    exec:
+      component: tools
+      workingDir: ${PROJECTS_ROOT}/demo
+      commandLine: composer install
+      group:
+        kind: build
+  - id: index-workspace
+    exec:
+      component: tools
+      workingDir: ${PROJECTS_ROOT}/demo
+      commandLine: |
+        msg="# Execute 'Intelephense: Index workspace' from Command palette (F1) to fix diagnostics #"
+        edge=$(echo "$msg" | sed 's/./#/g')
+        echo "$edge"
+        echo "$msg"
+        echo "$edge"
+      group:
+        kind: build
+  - id: run-web-application
+    exec:
+      component: tools
+      commandLine: "php -S 0.0.0.0:8000 -t web/"
+      workingDir: ${PROJECTS_ROOT}/demo
+      group:
+        kind: run
+  - id: run-cli-application
+    exec:
+      component: tools
+      commandLine: "php console.php"
+      workingDir: ${PROJECTS_ROOT}/demo
+      group:
+        kind: run
