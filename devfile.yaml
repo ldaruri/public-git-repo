@@ -4,7 +4,7 @@ metadata:
 components:
   - name: tools
     container:
-      image: registry.redhat.io/devspaces/udi-rhel8:3.0
+      image: quay.io/devspaces/udi-rhel8:3.0
       memoryLimit: 1Gi
       endpoints:
         - exposure: public
