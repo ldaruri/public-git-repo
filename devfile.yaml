@@ -13,19 +13,19 @@ components:
           targetPort: 8000
       volumeMounts:
         - name: composer
-          path: /home/jboss/.composer
+          path: /home/user/.composer
   - name: composer
     volume:
       size: 1G
 commands:
-  - id: install-dependencies
+  - id: 1-install-dependencies
     exec:
       component: tools
       workingDir: ${PROJECTS_ROOT}/demo
       commandLine: composer install
       group:
         kind: build
-  - id: index-workspace
+  - id: 2-index-workspace
     exec:
       component: tools
       workingDir: ${PROJECTS_ROOT}/demo
@@ -37,14 +37,14 @@ commands:
         echo "$edge"
       group:
         kind: build
-  - id: run-web-application
+  - id: 3-run-web-application
     exec:
       component: tools
       commandLine: "php -S 0.0.0.0:8000 -t web/"
       workingDir: ${PROJECTS_ROOT}/demo
       group:
         kind: run
-  - id: run-cli-application
+  - id: 4-run-cli-application
     exec:
       component: tools
       commandLine: "php console.php"
