@@ -1,4 +1,5 @@
 # PHP-DI application demo
+1. Tested on OCP 4.10 with OAuth on Power.
 
 This repository demonstrates how to write a simple application using PHP-DI without any framework.
 
