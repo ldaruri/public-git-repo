@@ -1,0 +1,1 @@
+1. Tested with Oauth on 412 on Power.
