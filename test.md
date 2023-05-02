@@ -1,2 +1,3 @@
 ds36412oauth
-ds36410patA
+ds36410pat
+ds36410oauth
